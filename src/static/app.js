@@ -472,6 +472,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Helper functions for social sharing
+  function createActivityUrl(activityName) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("activity", activityName);
+    return url.toString();
+  }
+
+  function createTwitterShareUrl(activityName, description) {
+    const text = encodeURIComponent(
+      `Check out "${activityName}" at Mergington High School! ${description}`
+    );
+    const url = encodeURIComponent(createActivityUrl(activityName));
+    return `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+  }
+
+  function createFacebookShareUrl(activityName) {
+    const url = encodeURIComponent(createActivityUrl(activityName));
+    return `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+  }
+
   // Function to render a single activity card
   function renderActivityCard(name, details) {
     const activityCard = document.createElement("div");
@@ -569,6 +589,12 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         }
       </div>
+      <div class="share-buttons">
+        <span class="share-label">Share:</span>
+        <a class="share-button share-twitter" href="${createTwitterShareUrl(name, details.description)}" target="_blank" rel="noopener noreferrer" title="Share on X (Twitter)" aria-label="Share on X (Twitter)">𝕏</a>
+        <a class="share-button share-facebook" href="${createFacebookShareUrl(name)}" target="_blank" rel="noopener noreferrer" title="Share on Facebook" aria-label="Share on Facebook">f</a>
+        <button class="share-button share-copy" data-activity="${name}" title="Copy link" aria-label="Copy link">🔗</button>
+      </div>
     `;
 
     // Add click handlers for delete buttons
@@ -586,6 +612,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
+
+    // Add click handler for copy link button
+    const copyButton = activityCard.querySelector(".share-copy");
+    copyButton.addEventListener("click", () => {
+      const url = createActivityUrl(name);
+      navigator.clipboard.writeText(url).then(() => {
+        const originalTitle = copyButton.title;
+        copyButton.title = "Copied!";
+        copyButton.classList.add("share-copy-success");
+        setTimeout(() => {
+          copyButton.title = originalTitle;
+          copyButton.classList.remove("share-copy-success");
+        }, 2000);
+      }).catch(() => {
+        copyButton.title = "Failed to copy";
+        setTimeout(() => {
+          copyButton.title = "Copy link";
+        }, 2000);
+      });
+    });
 
     activitiesList.appendChild(activityCard);
   }
