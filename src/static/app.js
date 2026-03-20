@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Activity categories with corresponding colors
   const activityTypes = {
-    sports: { label: "Sports", color: "#e8f5e9", textColor: "#2e7d32" },
-    arts: { label: "Arts", color: "#f3e5f5", textColor: "#7b1fa2" },
-    academic: { label: "Academic", color: "#e3f2fd", textColor: "#1565c0" },
-    community: { label: "Community", color: "#fff3e0", textColor: "#e65100" },
-    technology: { label: "Technology", color: "#e8eaf6", textColor: "#3949ab" },
+    sports: { label: "Sports" },
+    arts: { label: "Arts" },
+    academic: { label: "Academic" },
+    community: { label: "Community" },
+    technology: { label: "Technology" },
   };
 
   // State for activities and filters
@@ -501,7 +501,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Create activity tag
     const tagHtml = `
-      <span class="activity-tag" style="background-color: ${typeInfo.color}; color: ${typeInfo.textColor}">
+      <span class="activity-tag activity-tag-${activityType}">
         ${typeInfo.label}
       </span>
     `;
@@ -860,6 +860,32 @@ document.addEventListener("DOMContentLoaded", () => {
     setDayFilter,
     setTimeRangeFilter,
   };
+
+  // Dark mode toggle
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  const darkModeIcon = document.getElementById("dark-mode-icon");
+
+  function applyTheme(isDark) {
+    if (isDark) {
+      document.documentElement.setAttribute("data-theme", "dark");
+      darkModeIcon.textContent = "☀️";
+      darkModeToggle.title = "Switch to light mode";
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+      darkModeIcon.textContent = "🌙";
+      darkModeToggle.title = "Switch to dark mode";
+    }
+  }
+
+  // Load saved preference or default to light
+  const savedTheme = localStorage.getItem("theme");
+  applyTheme(savedTheme === "dark");
+
+  darkModeToggle.addEventListener("click", () => {
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    applyTheme(!isDark);
+    localStorage.setItem("theme", !isDark ? "dark" : "light");
+  });
 
   // Initialize app
   checkAuthentication();
