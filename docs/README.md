@@ -4,7 +4,16 @@ Welcome! This README is the central entry point for all OctoAcme project managem
 
 ## Project Management Processes Summary
 
-OctoAcme uses a structured, repeatable approach for managing projects, emphasizing customer value, iterative delivery, clear roles, risk management, and continuous improvement. All projects follow a six-phase lifecycle:
+OctoAcme uses a structured, repeatable approach for managing projects, emphasizing customer value, iterative delivery, clear roles, risk management, and continuous improvement. Core steps include:
+
+- **Initiation** – Define the problem and desired outcomes before any work begins.
+- **Planning** – Scope the work, estimate effort, and align the team and stakeholders.
+- **Execution & Tracking** – Deliver iteratively, monitor progress, and communicate status.
+- **Risk & Communication** – Proactively manage blockers and keep stakeholders informed.
+- **Release & Deployment** – Standardize the release process, verify quality, and announce changes.
+- **Retrospective** – Capture learnings after each cycle and improve iteratively.
+
+All projects follow this six-phase lifecycle, with each phase having a dedicated process document (linked below) that provides detailed guidance, templates, and role responsibilities.
 
 | Phase | Goal |
 |---|---|
@@ -14,8 +23,6 @@ OctoAcme uses a structured, repeatable approach for managing projects, emphasizi
 | **Risk & Communication** | Proactively manage blockers and keep stakeholders informed. |
 | **Release & Deployment** | Standardize the release process, verify quality, and announce changes. |
 | **Retrospective** | Capture learnings after each cycle and improve iteratively. |
-
-Each phase has a dedicated process document (linked below) that provides detailed guidance, templates, and role responsibilities.
 
 ## Roles Overview
 
